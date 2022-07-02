@@ -164,7 +164,9 @@ var svg;
 var imgData
 //------------------------------------------BOTON PARA DESCARGAR GRAFO--------------------------------------------------------------
 d3.select("#saveButton").on("click", function () {
-    var html = d3.select("svg")
+    let div=d3.select("#grafoCat")
+    // var html = d3.select("svg")
+    var html=d3.select(div.node().querySelector("svg"))
         .attr("xmlns", "http://www.w3.org/2000/svg")
         .node().parentNode.innerHTML;
     var image = new Image();
@@ -172,31 +174,34 @@ d3.select("#saveButton").on("click", function () {
     var svgg = new Blob([html], { type: "image/svg+xml;charset=utf-8" });
     var url = DOMURL.createObjectURL(svgg);
     // console.log(url)
-    var canvas = document.querySelector("canvas"),
+    var canvas = document.querySelector("#g\\:cat"),
         context = canvas.getContext("2d");
     image.onload = function () {
         context.drawImage(image, 0, 0);
         DOMURL.revokeObjectURL(url);
         var canvasdata = canvas.toDataURL("image/svg");
         var a = document.createElement("a");
-        a.download = "sample.png";
+        a.download = "GRAFO_CATEGORIAS.png";
         a.href = canvasdata;
         a.click();
-        document.getElementById("can").style.display = "none";
+        // document.getElementById("can").style.display = "none";
     };
     image.src = url;
 });
 
 d3.select("#saveButtonCli").on("click", function () {
-    var html = d3.select("svg")
+    let div=d3.select("#grafoCliente")
+    // var html = d3.select("svg")
+    var html=d3.select(div.node().querySelector("svg"))
         .attr("xmlns", "http://www.w3.org/2000/svg")
         .node().parentNode.innerHTML;
+    console.log(html)
     var image = new Image();
     var DOMURL = self.URL || self.webkitURL || self;
     var svgg = new Blob([html], { type: "image/svg+xml;charset=utf-8" });
     var url = DOMURL.createObjectURL(svgg);
     console.log(url)
-    var canvas = document.querySelector("canvas"),
+    var canvas = document.querySelector("#g\\:clie"),
         context = canvas.getContext("2d");
     image.onload = function () {
         context.drawImage(image, 0, 0);
@@ -206,13 +211,15 @@ d3.select("#saveButtonCli").on("click", function () {
         a.download = "GRAFO_CLIENTES.png";
         a.href = canvasdata;
         a.click();
-        document.getElementById("canCli").style.display = "none";
+        // document.getElementById("canCli").style.display = "none";
     };
     image.src = url;
 });
 
 d3.select("#saveButtonp").on("click", function () {
-    var html = d3.select("svg")
+    let div=d3.select("#grafoPeli")
+    // var html = d3.select("svg")
+    var html=d3.select(div.node().querySelector("svg"))
         .attr("xmlns", "http://www.w3.org/2000/svg")
         .node().parentNode.innerHTML;
     var image = new Image();
@@ -220,7 +227,7 @@ d3.select("#saveButtonp").on("click", function () {
     var svgg = new Blob([html], { type: "image/svg+xml;charset=utf-8" });
     var url = DOMURL.createObjectURL(svgg);
     console.log(url)
-    var canvas = document.querySelector("canvas"),
+    var canvas = document.querySelector("#foo\\:bar"),
         context = canvas.getContext("2d");
     image.onload = function () {
         context.drawImage(image, 0, 0);
@@ -230,13 +237,15 @@ d3.select("#saveButtonp").on("click", function () {
         a.download = "GRAFO_PELICULAS.png";
         a.href = canvasdata;
         a.click();
-        document.getElementById("canPeli").style.display = "none";
+        // document.getElementById("canPeli").style.display = "none";
     };
     image.src = url;
 });
 
 d3.select("#saveButtonAc").on("click", function () {
-    var html = d3.select("svg")
+    let div=d3.select("#grafoAct")
+    // var html = d3.select("svg")
+    var html=d3.select(div.node().querySelector("svg"))
         .attr("xmlns", "http://www.w3.org/2000/svg")
         .node().parentNode.innerHTML;
     var image = new Image();
@@ -244,7 +253,7 @@ d3.select("#saveButtonAc").on("click", function () {
     var svgg = new Blob([html], { type: "image/svg+xml;charset=utf-8" });
     var url = DOMURL.createObjectURL(svgg);
     console.log(url)
-    var canvas = document.querySelector("canvas"),
+    var canvas = document.querySelector("#g\\:act"),
         context = canvas.getContext("2d");
     image.onload = function () {
         context.drawImage(image, 0, 0);
@@ -254,7 +263,7 @@ d3.select("#saveButtonAc").on("click", function () {
         a.download = "GRAFO_ACTORES.png";
         a.href = canvasdata;
         a.click();
-        document.getElementById("canAct").style.display = "none";
+        // document.getElementById("canAct").style.display = "none";
     };
     image.src = url;
 });
@@ -412,7 +421,7 @@ class ArbolAvl {
         if (nodo != null) {
             this.in_orden(nodo.izquierda);
             if (nodo.alquilado == false) {
-                tbody.innerHTML += '<tr>\n <td>' + nodo.nombrePelicula + '</td>\n <td>' + nodo.descripcion + '</td>\n <td><button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick="modalInfo(' + nodo.idPelicula + ')"><i class="fa fa-info-circle"></i> Info</button></td>\n <td><button class="btn" onclick="alquilarPeli('+nodo.idPelicula+')"><i class="fa fa-cart-plus"></i> Alquilar</button></td>\n <td>' + nodo.precio + '</td>\n</tr>'
+                tbody.innerHTML += '<tr>\n <td>' + nodo.nombrePelicula + '</td>\n <td>' + nodo.descripcion + '</td>\n <td><button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalInfo(' + nodo.idPelicula + ')"><i class="fa fa-info-circle"></i> Info</button></td>\n <td><button class="btn" onclick="alquilarPeli('+nodo.idPelicula+')"><i class="fa fa-cart-plus"></i> Alquilar</button></td>\n <td>' + nodo.precio + '</td>\n</tr>'
                 console.log("valor=" + nodo.idPelicula + "nombre: " + nodo.nombrePelicula);
             }
 
@@ -507,7 +516,7 @@ class ListaSimpPeli {
         tbody.innerHTML = '';
         for (let index = 0; index < this.size; index++) {
             if (tmp.alquilado == false) {
-                tbody.innerHTML += '<tr>\n <td>' + tmp.nombrePeli + '</td>\n <td>' + tmp.descrip + '</td>\n <td><button class="btn" onclick="modalInfo('+tmp.idPeli+')"><i class="fa fa-info-circle"></i> Info</button></td>\n <td><button class="btn"><i class="fa fa-cart-plus" onclick="alquilarPeli('+tmp.idPeli+')"></i> Alquilar</button></td>\n <td>' + tmp.precio + '</td>\n</tr>'
+                tbody.innerHTML += '<tr>\n <td>' + tmp.nombrePeli + '</td>\n <td>' + tmp.descrip + '</td>\n <td><button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalInfo('+tmp.idPeli+')"><i class="fa fa-info-circle"></i> Info</button></td>\n <td><button class="btn" onclick="alquilarPeli('+tmp.idPeli+')"><i class="fa fa-cart-plus"></i> Alquilar</button></td>\n <td>' + tmp.precio + '</td>\n</tr>'
             }
             tmp = tmp.siguiente
         }
@@ -1107,7 +1116,7 @@ class ListaDeListas {
         let contador = 0;
         let uniones = ""
         while (libU != null) {
-            codigodotH += 'nodu' + libU.company + cabeza + '[label="' + libU.company + '",fillcolor=white,group=0] \n'
+            codigodotH += 'nodu' + libU.company.replace(/\s+/g, '') + cabeza + '[label="' + libU.company + '",fillcolor=white,group=0] \n'
             cats.innerHTML+='<div class="col s12 m6 l4" style="padding: 30px 5px;" id="cardCat"> <div class="card" style="width: 18rem;"> <div class="card-body"> <h5 class="card-title">'+libU.company+'</h5> </div></div> </div>'
             // console.log("---SUS LIBROS COMPRADOS: "+libU.company);
             libU = libU.siguiente;
@@ -1118,12 +1127,12 @@ class ListaDeListas {
 
             let aux = libUs.siguiente
             if (aux != null) {
-                uniones = uniones + 'nodu' + libUs.company + cabeza + '->' + 'nodu' + aux.company + cabeza + '[dir=forward color="black"] \n'
-                alineacion += 'nodu' + libUs.company + cabeza + ', \n';
-                alineacion += 'nodu' + aux.company + cabeza + '\n';
+                uniones = uniones + 'nodu' + libUs.company.replace(/\s+/g, '') + cabeza + '->' + 'nodu' + aux.company.replace(/\s+/g, '') + cabeza + '[dir=forward color="black"] \n'
+                alineacion += 'nodu' + libUs.company.replace(/\s+/g, '') + cabeza + ', \n';
+                alineacion += 'nodu' + aux.company.replace(/\s+/g, '') + cabeza + '\n';
             }
             if (aux == null) {
-                alineacion += 'nodu' + libUs.company + cabeza + '\n';
+                alineacion += 'nodu' + libUs.company.replace(/\s+/g, '') + cabeza + '\n';
             }
 
             // codigodotH+='nodu'+libU.nombreLibro+'[label="'+libU.nombreLibro+'",fillcolor=white,group=0]'
@@ -1136,7 +1145,7 @@ class ListaDeListas {
         }
         let primero = usuario.abajo;
         if (primero != null) {
-            uniones += cabeza + '->' + 'nodu' + primero.company + cabeza + '\n'
+            uniones += cabeza + '->' + 'nodu' + primero.company.replace(/\s+/g, '') + cabeza + '\n'
         }
         alineacion += '}'
         // alineacion="{rank=same; \n"
@@ -1245,7 +1254,7 @@ function pulseAct() {
 }
 
 function modalInfo(id) {
-    let nodo = listPeli.buscarPeli(id)
+    let nodo = listPeli.buscarPeli(parseInt(id))
     let modal = document.getElementById("mostrarPeli");
     modal.innerHTML = ''
     modal.innerHTML += ' <div class="modal-header">\n <h5 class="modal-title" id="exampleModalLabel">' + nodo.nombrePeli + '</h5>\n <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n</div><div class="modal-body">\n <h6 id="tituloComen">DESCRIPCION: </h6>' + nodo.descrip + '<h6 id="tituloComen">Comentarios</h6>\n'
