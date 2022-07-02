@@ -89,7 +89,7 @@
             <div class="section white center" id="cargas" style="display:block;">
                 <div class="row container">
                     <h2 class="header">Cargas Masivas</h2>
-                    
+
                     <div class="col s12 m6 l4" style="padding: 30px 5px;">
                         <div class="card small">
                             <div class="card-image waves-effect waves-block waves-light">
@@ -98,7 +98,7 @@
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator grey-text text-darken-4"
-                                    style="font-weight: 500;">Carga Clientes    <i
+                                    style="font-weight: 500;">Carga Clientes <i
                                         class="material-icons right">more_vert</i></span>
                             </div>
                             <div class="formFile">
@@ -154,51 +154,51 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <!--------- GRAFO PARA CLIENTES--------- -->
             <div class="section white center" id="gclientes" style="display:none;">
                 <button type="button" id="saveButtonCli" class="btn btn-primary">Descargar Grafo</button>
                 <div class="padre" id="grafoCliente">
-                    
-                  </div>
-                  <canvas width="6500" height="8000" id="canCli" style="display: block;">
-                    
+
+                </div>
+                <canvas width="6500" height="8000" id="canCli" style="display: block;">
+
                 </canvas>
             </div>
             <!--------- GRAFO PARA PELICULAS--------- -->
             <div class="section white center" id="gpelis" style="display:none;">
                 <button type="button" id="saveButtonp" class="btn btn-primary">Descargar Grafo</button>
                 <div class="padre" id="grafoPeli">
-                    
+
                 </div>
                 <canvas width="6500" height="8000" id="canPeli" style="display: block;">
-                  
-              </canvas>
+
+                </canvas>
             </div>
             <!--------- GRAFO PARA ACTORES--------- -->
             <div class="section white center" id="gactores" style="display:none;">
                 <button type="button" id="saveButtonAc" class="btn btn-primary">Descargar Grafo</button>
                 <div class="padre" id="grafoAct">
-                    
+
                 </div>
                 <canvas width="7500" height="9000" id="canAct" style="display: block;">
-                  
-              </canvas>
+
+                </canvas>
             </div>
             <!--------- GRAFO PARA CATEGORIAS--------- -->
             <div class="section white center" id="gcategorias" style="display:none;">
                 <button type="button" id="saveButton" class="btn btn-primary">Descargar Grafo</button>
                 <div class="padre" id="grafoCat">
-                    
+
                 </div>
                 <canvas width="6500" height="8000" id="can" style="display: block;">
-                    
+
                 </canvas>
-                
+
             </div>
             <div class="section white center" id="blockchain" style="display:none;">
-                
+
             </div>
         </body>
     </div>
@@ -209,12 +209,99 @@
 
     <!-- ---------------------------------------------- -----VISTA DE USUARIO--------------------------------------------- -->
     <div id="usuario" style="display: none;">
-        
+        <div class="navbar-fixed">
+            <nav class="indigo darken-3 ">
+                <div class="nav-wrapper container">
+                    <a href="#" class="brand-logo">Movie Cat's</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a onclick="homeUser()"> Home<i class="material-icons left">home</i></a></li>
+                        <li><a onclick="cerrarSesion()">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ----------------------------------VISTA PRINCIPAL USUARIO------- -->
+        <div id="homeUser" style="display: none;">
+            <h3 style="position: center;" id="tituloHU">MOVIE CATS</h3>
+            <select class="form-select" aria-label="Default select example" id="selectMenu" onchange="pulse()">
+                <option selected>Seleccione el ordenamiento</option>
+                <option value="ascendente">Ascendente</option>
+                <option value="descendente">Descendente</option>
+            </select>
+            <!-- <option selected>Escoge el Nombre del Libro</option>
+            <option value="asfasfsf">asfasf</option> -->
+            <button type="button" id="butonVA" class="btn btn-primary" onclick="actoresUser()">Ver Actores</button>
+            <button type="button" id="butonVC" class="btn btn-primary">Ver Categorias</button>
+            <br>
+            <table class="table table-bordered table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Titulo Pelicula</th>
+                        <th>Descripcion</th>
+                        <th></th>
+                        <th></th>
+                        <th>Precio (Q)</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <!-- <tr>
+                        <td>Books</td>
+                        <td>Nostrud ut anim irure minim sint incididunt laboris eu. Cillum voluptate nulla do commodo ipsum id et reprehenderit velit aliquip. Occaecat culpa duis amet eu reprehenderit ea. Enim incididunt aute do ipsum do amet Lorem tempor. Tempor elit dolor pariatur eiusmod elit amet ad ex aliqua ex non cupidatat ut. Culpa laborum fugiat deserunt ipsum culpa est et eiusmod. Consectetur nisi mollit ex enim non excepteur ipsum reprehenderit deserunt dolore veniam eu sit eu</td>
+                        <td><button class="btn"><i class="fa fa-info-circle"></i> Info</button></td>
+                        <td><button class="btn"><i class="fa fa-cart-plus"></i> Alquilar</button></td>
+                        <td>25.00</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+        <!-- ----------------------------------------------------- -->
+        <!-- ---------------VISTA ACTORES USUARIOS--------------- -->
+        <div id="actoresUser" style="display: none;">
+            <h3 style="position: center;" id="tituloHU">ACTORES</h3>
+            <select class="form-select" aria-label="Default select example" id="selectMenuAct" onchange="pulseAct()">
+                <option selected>Seleccione el ordenamiento</option>
+                <option value="inorden">In Orden</option>
+                <option value="preorden">Pre Orden</option>
+                <option value="postorden">Post Orden</option>
+            </select>
+            <table class="table table-bordered table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Titulo Pelicula</th>
+                        <th>Descripcion</th>
+                        <th></th>
+                        <th></th>
+                        <th>Precio (Q)</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyAct">
+                    <!-- <tr>
+                        <td>Books</td>
+                        <td>Nostrud ut anim irure minim sint incididunt laboris eu. Cillum voluptate nulla do commodo ipsum id et reprehenderit velit aliquip. Occaecat culpa duis amet eu reprehenderit ea. Enim incididunt aute do ipsum do amet Lorem tempor. Tempor elit dolor pariatur eiusmod elit amet ad ex aliqua ex non cupidatat ut. Culpa laborum fugiat deserunt ipsum culpa est et eiusmod. Consectetur nisi mollit ex enim non excepteur ipsum reprehenderit deserunt dolore veniam eu sit eu</td>
+                        <td><button class="btn"><i class="fa fa-info-circle"></i> Info</button></td>
+                        <td><button class="btn"><i class="fa fa-cart-plus"></i> Alquilar</button></td>
+                        <td>25.00</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ------------------------------------------------------ -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="mostrarPeli">
+
+                </div>
+            </div>
+        </div>
     </div>
     <!-- ---------------------------------------------- ------------------------------------------------------------------ -->
     <!-- <script src="//d3js.org/d3.v5.min.js"></script> -->
-    <script src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js"></script>
-	<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
+    <script
+        src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js"></script>
+    <script
+        src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
     <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
     <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
     <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>

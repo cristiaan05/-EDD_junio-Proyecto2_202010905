@@ -2,20 +2,58 @@
 
 function login(event) {
     event.preventDefault()
+    let cliente = null
+    localStorage.removeItem("usuario");
     let isAdmin = document.querySelector("#check");
     usuario = document.getElementById("user").value
     password = document.getElementById("pass").value
-    if (usuario == "EDD" && password == "123" && isAdmin.checked == true) {
+    if (usuario == "EDD") {
         // alert('Te haz loggeado bien')
-        localStorage.setItem("usuario", JSON.stringify(usuario))
-        document.getElementById("admin").style.display = "block";
-        document.getElementById("login").style.display = "none";
-        console.log("admin")
+        if (password == "123" && isAdmin.checked == true) {
+            localStorage.setItem("usuario", JSON.stringify(usuario))
+            document.getElementById("admin").style.display = "block";
+            document.getElementById("cargas").style.display = "block";
+            document.getElementById("login").style.display = "none";
+
+        } else if (password == "123" && isAdmin.checked == false) {
+            alert('SI ES ADMIN DEBE MARCAR LA CASILLA PARA PODER ENTRAR')
+        } else {
+            alert('DATOS ERRONEOS')
+        }
+    } else if (usuario != "EDD" && listaClientes == null) {
+        alert('EL USUARIO NO EXISTE')
+    } else {
+        cliente = listaClientes.buscarCliente(usuario);
+        if (cliente.password == password && isAdmin.checked == false) {
+            localStorage.setItem("usuario", JSON.stringify(usuario))
+            document.getElementById("usuario").style.display = "block";
+            document.getElementById("homeUser").style.display = "block";
+            document.getElementById("login").style.display = "none";
+            // console.log("simonn")
+        } else if (cliente.password == password && isAdmin.checked == true) {
+            alert('DISCULPE NO ES ADMIN NO PUEDE ENTRAR')
+        } else if (cliente.password != password && isAdmin.checked == false) {
+            alert('CONTRASEÑA INCORRECTA')
+        } else if (cliente.password != password && isAdmin.checked == true) {
+            alert('CONTRASEÑA INCORRECTA')
+        } else if (cliente == null || cliente == undefined) {
+            alert('EL USUARIO NO EXISTE')
+        }
     }
 
 }
 function cerrarSesion() {
-    block
+    localStorage.removeItem("usuario");
+    document.getElementById("admin").style.display = "none";
+    document.getElementById("login").style.display = "block";
+    document.getElementById("cargas").style.display = "none";
+    document.getElementById("gclientes").style.display = "none";
+    document.getElementById("gcategorias").style.display = "none";
+    document.getElementById("gpelis").style.display = "none";
+    document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "none"
+    document.getElementById("homeUser").style.display = "none";
+    document.getElementById("actoresUser").style.display = "none";
 }
 
 function mostrarGclientes() {
@@ -26,6 +64,7 @@ function mostrarGclientes() {
     document.getElementById("gcategorias").style.display = "none";
     document.getElementById("gpelis").style.display = "none";
     document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "none"
 }
 function mostrarGcategorias() {
     document.getElementById("admin").style.display = "block";
@@ -35,6 +74,7 @@ function mostrarGcategorias() {
     document.getElementById("gcategorias").style.display = "block";
     document.getElementById("gpelis").style.display = "none";
     document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "none"
 }
 function mostrarGpelis() {
     document.getElementById("admin").style.display = "block";
@@ -44,6 +84,7 @@ function mostrarGpelis() {
     document.getElementById("gcategorias").style.display = "none";
     document.getElementById("gpelis").style.display = "block";
     document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "none"
 }
 function mostrarGactores() {
     document.getElementById("admin").style.display = "block";
@@ -53,6 +94,7 @@ function mostrarGactores() {
     document.getElementById("gcategorias").style.display = "none";
     document.getElementById("gpelis").style.display = "none";
     document.getElementById("gactores").style.display = "block";
+    document.getElementById("usuario").style.display = "none"
 }
 
 function mostrarCargas() {
@@ -63,7 +105,44 @@ function mostrarCargas() {
     document.getElementById("gcategorias").style.display = "none";
     document.getElementById("gpelis").style.display = "none";
     document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "none"
 }
+function vistaUsuario() {
+    document.getElementById("admin").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("cargas").style.display = "none";
+    document.getElementById("gclientes").style.display = "none";
+    document.getElementById("gcategorias").style.display = "none";
+    document.getElementById("gpelis").style.display = "none";
+    document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "block";
+    document.getElementById("actoresUser").style.display = "none";
+}
+function homeUser() {
+    document.getElementById("admin").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("cargas").style.display = "none";
+    document.getElementById("gclientes").style.display = "none";
+    document.getElementById("gcategorias").style.display = "none";
+    document.getElementById("gpelis").style.display = "none";
+    document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "block";
+    document.getElementById("homeUser").style.display = "block";
+    document.getElementById("actoresUser").style.display = "none";
+}
+function actoresUser() {
+    document.getElementById("admin").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("cargas").style.display = "none";
+    document.getElementById("gclientes").style.display = "none";
+    document.getElementById("gcategorias").style.display = "none";
+    document.getElementById("gpelis").style.display = "none";
+    document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "block";
+    document.getElementById("homeUser").style.display = "none";
+    document.getElementById("actoresUser").style.display = "block";
+}
+
 var svg;
 var imgData
 //------------------------------------------BOTON PARA DESCARGAR GRAFO--------------------------------------------------------------
@@ -75,7 +154,7 @@ d3.select("#saveButton").on("click", function () {
     var DOMURL = self.URL || self.webkitURL || self;
     var svgg = new Blob([html], { type: "image/svg+xml;charset=utf-8" });
     var url = DOMURL.createObjectURL(svgg);
-    console.log(url)
+    // console.log(url)
     var canvas = document.querySelector("canvas"),
         context = canvas.getContext("2d");
     image.onload = function () {
@@ -172,6 +251,7 @@ class NodoAvl {
         this.descripcion = descripcion;
         this.puntaStar = puntaStar;
         this.precio = precio;
+        this.alquilado = false;
         this.izquierda = null;
         this.derecha = null;
         this.altura = 0;
@@ -260,7 +340,7 @@ class ArbolAvl {
             return null;
         }
         if ((this.altura(temporal.izquierda) - this.altura(temporal.derecha)) > this.altDiferencia) {
-            if (this.altura(temporal.izquierda) >= this.altura(temporal.izquierda.derecha)) {
+            if (this.altura(temporal.izquierda.izquierda) >= this.altura(temporal.izquierda.derecha)) {
                 temporal = this.rotacionDerecha(temporal);
             } else {
                 temporal = this.rotacionDobleIzqDer(temporal);
@@ -277,6 +357,25 @@ class ArbolAvl {
         return temporal;
     }
 
+    buscarAvlP(id) {
+        return this.buscarAvl(this.cabeza, id);
+    }
+
+    buscarAvl(raiz, id) {
+        if (raiz == null) {
+            return null;
+        }
+        else if (id == parseInt(raiz.idPelicula)) {
+            return raiz;
+        }
+        else if (id < parseInt(raiz.idPelicula)) {
+            return this.buscarAvl(raiz.izquierda, id);
+        }
+        else {
+            return this.buscarAvl(raiz.derecha, id);
+        }
+    }
+
     postorden() {
         this.post_orden(this.cabeza);
     }
@@ -284,7 +383,38 @@ class ArbolAvl {
         if (nodo != null) {
             this.post_orden(nodo.izquierda);
             this.post_orden(nodo.derecha);
-            console.log("valor=" + nodo.nombrePelicula);
+            console.log("valor=" + nodo.idPelicula);
+        }
+    }
+
+    inorden() {
+        this.in_orden(this.cabeza);
+    }
+    in_orden(nodo) {
+        let tbody = document.getElementById("tbody")
+        if (nodo != null) {
+            this.in_orden(nodo.izquierda);
+            if (nodo.alquilado == false) {
+                tbody.innerHTML += '<tr>\n <td>' + nodo.nombrePelicula + '</td>\n <td>' + nodo.descripcion + '</td>\n <td><button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick="modalInfo(' + nodo.idPelicula + ')"><i class="fa fa-info-circle"></i> Info</button></td>\n <td><button class="btn" onclick="alquilarPeli('+nodo.idPelicula+')"><i class="fa fa-cart-plus"></i> Alquilar</button></td>\n <td>' + nodo.precio + '</td>\n</tr>'
+                console.log("valor=" + nodo.idPelicula + "nombre: " + nodo.nombrePelicula);
+            }
+
+            this.in_orden(nodo.derecha);
+        }
+    }
+
+    desc() {
+        this.descendente(this.cabeza);
+    }
+    descendente(nodo) {
+        let tbody = document.getElementById("tbody")
+        if (nodo != null) {
+            this.descendente(nodo.derecha);
+            if (nodo.alquilado == false) {
+                tbody.innerHTML += '<tr>\n <td>' + nodo.nombrePelicula + '</td>\n <td>' + nodo.descripcion + '</td>\n <td><button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick="modalInfo(' + nodo.idPelicula + ')"><i class="fa fa-info-circle"></i> Info</button></td>\n <td><button class="btn"><i class="fa fa-cart-plus"></i> Alquilar</button></td>\n <td>' + nodo.precio + '</td>\n</tr>'
+                console.log("valor=" + nodo.idPelicula + "nombre: " + nodo.nombrePelicula);
+            }
+            this.descendente(nodo.izquierda);
         }
     }
 
@@ -306,7 +436,7 @@ class ArbolAvl {
     }
     generarAVL2(raiz) {
         if (raiz != null) {
-            this.nodos += raiz.idPelicula + '[label="' + raiz.nombrePelicula + '"];\n';
+            this.nodos += raiz.idPelicula + '[label="' + raiz.nombrePelicula + '\n' + raiz.idPelicula + '"];\n';
             if (raiz.izquierda != null) {
                 this.relaciones += raiz.idPelicula + '-- ' + raiz.izquierda.idPelicula + ';\n';
             }
@@ -320,7 +450,87 @@ class ArbolAvl {
     }
 
 }
+///lista simplle mostrar y ordenar peliculas
+class Pelicula {
+    constructor(idPeli, nombrePeli, descrip, puntua, precio) {
+        this.idPeli = idPeli;
+        this.nombrePeli = nombrePeli;
+        this.descrip = descrip;
+        this.puntua = puntua;
+        this.precio = precio;
+        this.alquilado=false;
+        this.comentarios = []
+        this.siguiente = null;
+    }
+}
+
+class ListaSimpPeli {
+    constructor() {
+        this.primero = null;
+        this.size = 0;
+    }
+
+    insertarP(id, nombre, desc, punt, precio) {
+        let nuevo = new Pelicula(id, nombre, desc, punt, precio);
+        this.size++;
+        if (this.primero == null) {
+            this.primero = nuevo;
+        } else {
+            let tmp = this.primero
+            while (tmp.siguiente != null) {
+                tmp = tmp.siguiente
+            }
+            tmp.siguiente = nuevo
+        }
+    }
+
+    mostrarPeli() {
+        let tbody = document.getElementById("tbody")
+        let tmp = this.primero
+        tbody.innerHTML = '';
+        for (let index = 0; index < this.size; index++) {
+            if (tmp.alquilado == false) {
+                tbody.innerHTML += '<tr>\n <td>' + tmp.nombrePeli + '</td>\n <td>' + tmp.descrip + '</td>\n <td><button class="btn" onclick="modalInfo('+tmp.idPeli+')"><i class="fa fa-info-circle"></i> Info</button></td>\n <td><button class="btn"><i class="fa fa-cart-plus" onclick="alquilarPeli('+tmp.idPeli+')"></i> Alquilar</button></td>\n <td>' + tmp.precio + '</td>\n</tr>'
+            }
+            tmp = tmp.siguiente
+        }
+    }
+
+    buscarPeli(idPelicula) {
+        let tmp = this.primero;
+        while (tmp != null) {
+            if (tmp.idPeli == idPelicula) {
+                return tmp;
+            }
+            tmp = tmp.siguiente
+        }
+    }
+
+    eliminarPelicula(id) {
+        let tmp = this.primero;
+        while (tmp != null) {
+            if (tmp.idPeli == id) {
+                this.primero = tmp.siguiente;
+                console.log("Pelicula eliminada: " + tmp.nombrePeli)
+                break
+            }
+            else if (tmp.siguiente != null) {
+                if (tmp.siguiente.idPeli == id) {
+                    let borrar = tmp.siguiente;
+                    tmp.siguiente = borrar.siguiente;
+                    borrar.siguiente = null;
+                    console.log("Pelicula eliminada: " + borrar.nombrePeli);
+                    break;
+                }
+            }
+            tmp = tmp.siguiente
+        }
+    }
+
+}
+
 var avlPeli;
+var listPeli
 function peliculasAVL(e) {
 
     var archivo = e.target.files[0];
@@ -333,15 +543,17 @@ function peliculasAVL(e) {
         let contenido = e.target.result;
         const peliculas = JSON.parse(contenido);
         avlPeli = new ArbolAvl()
+        listPeli = new ListaSimpPeli()
         for (const x in peliculas) {
             let peli = peliculas[x]
             avlPeli.insertar(peli.id_pelicula, peli.nombre_pelicula, peli.descripcion, peli.puntuacion_star, peli.precio_Q);
-
+            listPeli.insertarP(peli.id_pelicula, peli.nombre_pelicula, peli.descripcion, peli.puntuacion_star, peli.precio_Q);
 
         }
         console.log("jejejeje")
         avlPeli.generarAVL()
-        avlPeli.postorden()
+        avlPeli.inorden()
+        listPeli.mostrarPeli()
     }
 
     lector.readAsText(archivo);
@@ -392,29 +604,42 @@ class ListaSimple {
     }
     mostrarClientes() {
         let aux = this.primero;
-        let grafoC='digraph L{ \n node[shape=box fillcolor="#FFEDBB"style=filled] \n subgraph cluster_p{ \n label ="CLIENTES GRAFO" bgcolor="gray" \n edge[dir="forward"] \n';
-        let uniones=''
-        let rank='{rank=same;\n'
+        let grafoC = 'digraph L{ \n node[shape=box fillcolor="#FFEDBB"style=filled] \n subgraph cluster_p{ \n label ="CLIENTES GRAFO" bgcolor="gray" \n edge[dir="forward"] \n';
+        let uniones = ''
+        let rank = '{rank=same;\n'
         while (aux != null) {
-            grafoC+='nodo'+aux.dpi+'[label="'+aux.nombreCompleto+'",fillcolor=white,group=0] \n';
-            if (aux.siguiente!=null) {
-                uniones+='nodo'+aux.dpi+'->'+'nodo'+aux.siguiente.dpi+'[dir=forward color="black"] \n'
-                rank+='nodo'+aux.dpi+', \n'
-            } else{
-                rank+='nodo'+aux.dpi+'\n'
+            grafoC += 'nodo' + aux.dpi + '[label="' + aux.nombreCompleto + '",fillcolor=white,group=0] \n';
+            if (aux.siguiente != null) {
+                uniones += 'nodo' + aux.dpi + '->' + 'nodo' + aux.siguiente.dpi + '[dir=forward color="black"] \n'
+                rank += 'nodo' + aux.dpi + ', \n'
+            } else {
+                rank += 'nodo' + aux.dpi + '\n'
             }
             console.log("Cliente: " + aux.nombreCompleto)
             aux = aux.siguiente;
         }
-        rank+='}\n'
-        grafoC+=uniones
-        grafoC+=rank
-        grafoC+='}}'
+        rank += '}\n'
+        grafoC += uniones
+        grafoC += rank
+        grafoC += '}}'
         console.log(grafoC)
         d3.select("#grafoCliente").graphviz()
-        .zoom(false)
-        .renderDot(grafoC);
+            .zoom(false)
+            .renderDot(grafoC);
         return "ok"
+    }
+
+    buscarCliente(nombreUsuario) {
+        let tmp = this.primero;
+        for (let index = 0; index < this.size; index++) {
+            if (tmp.nombreUsuario === nombreUsuario) {
+                console.log("ENCONTRADO: " + tmp.nombreCompleto + " user: " + tmp.nombreUsuario);
+                return tmp;
+            }
+            tmp = tmp.siguiente;
+        }
+        console.log("No se encontro al cliente")
+        return null
     }
 }
 
@@ -542,8 +767,8 @@ class ArbolABB {
 
             // escribirArchivo("./reporte.dot", this.graphviz);
             d3.select("#grafoAct").graphviz()
-            .zoom(false)
-            .renderDot(this.graphviz)
+                .zoom(false)
+                .renderDot(this.graphviz)
             console.log(this.graphviz)
             return null;
         }
@@ -559,22 +784,45 @@ class ArbolABB {
             }
             if (raiz.getDer() != null) {
                 this.relaciones += raiz.dni + " -- " + raiz.getDer().dni + ";\n";
-               
+
             }
             this.generarABB(raiz.getIzq());
             this.generarABB(raiz.getDer());
         }
     }
 
-    inorden() {
-        this.in_orden(this.cabeza);
+    inordenABB() {
+        this.inABB(this.cabeza);
     }
 
-    in_orden(nodo) {
+    inABB(nodo) {
         if (nodo != null) {
-            this.in_orden(nodo.izquierda);
+            this.inABB(nodo.izquierda);
             console.log("Valor:", nodo.nombreActor);
-            this.in_orden(nodo.derecha);
+            this.inABB(nodo.derecha);
+        }
+    }
+
+    preordenABB(){
+        this.preABB(this.cabeza);
+    }
+
+    preABB(nodo){
+        if(nodo!=null){
+            console.log("Valor:",nodo.nombreActor);
+            this.preABB(nodo.izquierda);
+            this.preABB(nodo.derecha);
+        }
+    }
+    posordenABB(){
+        this.poABB(this.cabeza);
+    }
+    
+    poABB(nodo){
+        if(nodo!=null){
+            this.poABB(nodo.izquierda);
+            this.poABB(nodo.derecha);
+            console.log("Valor:",nodo.nombreActor);           
         }
     }
 
@@ -597,7 +845,7 @@ function actoresABB(e) {
             arbolBB.insertar(actor.dni, actor.nombre_actor, actor.correo, actor.descripcion)
 
         }
-        arbolBB.inorden()
+        arbolBB.inordenABB()
         arbolBB.graficoABB(true)
         // listaClientes.mostrarClientes()
     }
@@ -664,18 +912,29 @@ class ListaDeListas {
         do {
             // console.log("entre aqui")
             if (tempCat.idCabecera == idCabecera) {
-                if(this.buscarDato(idCabecera,idCategoria)=="T"){
-                    alert('El dato: '+idCategoria+' ya existe no se agregara')
+                if (this.buscarDato(idCabecera, idCategoria) == "T") {
+                    alert('El dato: ' + idCategoria + ' ya existe no se agregara')
                     break;
-                }else{
-                let nuevaCat = new NodoLL(idCategoria, company)
-                let primeraCat = tempCat.abajo;
-                tempCat.abajo = nuevaCat;
-                nuevaCat.siguiente = primeraCat;
-                tempCat.sizeCategorias++;
-                // alert('CATEGORIA AGREGADA');
-                // console.log("Libro: "+nuevoLibro.nombreLibro+" a usuario: "+usuario+" agregado")
-                break;
+                } else {
+                    let nuevaCat = new NodoLL(idCategoria, company)
+                    let primeraCat = tempCat.abajo;
+                    if (primeraCat == null) {
+                        tempCat.abajo = nuevaCat;
+                        tempCat.sizeCategorias++;
+                    } else {
+                        let tmp = tempCat.abajo;
+                        while (tmp.siguiente != null) {
+                            tmp = tmp.siguiente
+                        }
+                        tmp.siguiente = nuevaCat
+                        tempCat.sizeCategorias++;
+                    }
+                    // tempCat.abajo = nuevaCat;
+                    // nuevaCat.siguiente = primeraCat;
+                    // tempCat.sizeCategorias++;
+                    // alert('CATEGORIA AGREGADA');
+                    // console.log("Libro: "+nuevoLibro.nombreLibro+" a usuario: "+usuario+" agregado")
+                    break;
                 }
             }
             tempCat = tempCat.siguiente;
@@ -718,14 +977,14 @@ class ListaDeListas {
         }
     }
 
-    buscarDato(idCabecera,idCategoria) {
+    buscarDato(idCabecera, idCategoria) {
         var temporal = this.primero
         while (temporal != null) {
             if (temporal.idCabecera == idCabecera) {
                 // console.log("*********** Cabecera " + idCabecera + " *********")
                 var temporalcanciones = temporal.abajo
                 while (temporalcanciones != null) {
-                    if (temporalcanciones.id===idCategoria) {
+                    if (temporalcanciones.id === idCategoria) {
                         return "T"
                     }
                     console.log(temporalcanciones.id)
@@ -929,3 +1188,102 @@ function listasL(e) {
 }
 document.getElementById("listasL").addEventListener("change", listasL, false);
 // -------------------------------------FIN---LISTAS--DE--LISTAS----------------------------------------------------
+
+
+
+//---------------------------------FUNCIONES USUARIO------------------------------------------------------------------
+function pulse() {
+    let libro = document.getElementById("selectMenu").value;
+    let tabla = document.getElementById("tbody")
+    tabla.innerHTML = ''
+    if (libro == "ascendente") {
+        avlPeli.inorden()
+    } else if (libro == "descendente") {
+        avlPeli.desc()
+    }
+    console.log(libro)
+}
+function pulseAct() {
+    let orden = document.getElementById("selectMenuAct").value;
+    let tabla = document.getElementById("tbodyAct")
+    tabla.innerHTML = ''
+    if (orden == "inorden") {
+        arbolBB.inordenABB()
+    } else if (orden == "preorden") {
+        arbolBB.preordenABB()
+    } else if (orden == "postorden") {
+        arbolBB.posordenABB()
+    }
+}
+
+function modalInfo(id) {
+    let nodo = listPeli.buscarPeli(id)
+    let modal = document.getElementById("mostrarPeli");
+    modal.innerHTML = ''
+    modal.innerHTML += ' <div class="modal-header">\n <h5 class="modal-title" id="exampleModalLabel">' + nodo.nombrePeli + '</h5>\n <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n</div><div class="modal-body">\n <h6 id="tituloComen">DESCRIPCION: </h6>' + nodo.descrip + '<h6 id="tituloComen">Comentarios</h6>\n'
+    modal.innerHTML += '<ol class="list-group list-group-numbered" id="listasPeli">\n'
+    let lista = document.getElementById("listasPeli")
+    for (let index = 0; index < nodo.comentarios.length; index++) {
+        if (nodo.comentarios.length == 0) {
+            break
+        } else {
+            lista.innerHTML += '<li class="list-group-item d-flex justify-content-between align-items-start"> <div class="ms-2 me-auto">\n <div class="fw-bold">' + nodo.comentarios[index] + '</div>\n </div> </li>'
+        }
+
+    }
+    listPeli.innerHTML += '\n </ol>\n';
+    modal.innerHTML += '<h6>Puntuacion: </h6> \n'
+    if (parseInt(nodo.puntua) == 0) {
+        modal.innerHTML += '<span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>'
+    } else if (parseInt(nodo.puntua) == 5) {
+        modal.innerHTML += '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span>'
+    }
+    else {
+        let star = (5 - parseInt(nodo.puntua))
+        for (let index = 1; index <= nodo.puntua; index++) {
+            modal.innerHTML += '<span class="fa fa-star checked"></span>'
+        }
+        for (let index = 1; index <= star; index++) {
+            modal.innerHTML += '<span class="fa fa-star"></span>'
+        }
+    }
+
+    modal.innerHTML += '<div class="input-group mb-3">\n <form> <input type="number" id="mouse-only-number-input" class="form-control" placeholder="Ingres su puntuacion" aria-label="Recipient s username" aria-describedby="button-addon2" name="amount" value="0" min="0" max="5"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="ingresarCa(' + id + ')">Calificar</button>\n </div>\n <input type="text" id="comentario" placeholder="Ingrese su comentario"/>\n <button type="button" class="btn btn-primary" onclick="ingresarComentario(' + id + ')">Enviar</button>\n </form> </div>\n'
+    modal.innerHTML += '<div class="modal-footer"><button class="btn btn-primary me-md-2" type="button" onclick="alquilarPeli(' + nodo.idPeli + ')"><i class="fa fa-cart-plus"></i>Alquilar</button></div>'
+    let mouseOnlyNumberInputField = document.getElementById("mouse-only-number-input");
+
+    // console.log(mouseOnlyNumberInputField.value)
+    mouseOnlyNumberInputField.addEventListener("keypress", (event) => {
+        event.preventDefault();
+    });
+
+
+    // modal.innerHTML+='<div class="input-group mb-3">\n <input type="range" list="tickmarks">\n <datalist id="tickmarks"><option value="0" label="0"><option value="1" label="1"><option value="2" label="2"><option value="3" label="3"><option value="4" label="4"><option value="5" label="5"></datalist> \n </div>\n </div>\n <div class="modal-footer">\n <input type="text" id="comentario" placeholder="Ingrese su comentario"/>\n <button type="button" class="btn btn-primary" onclick="ingresarComentario('+id+')">Enviar</button>\n </div>\n'
+    // modal.innerHTML+='<input type="number" id="number" name="amount" value="0" min="5" max="10"> <button>Submit</button>';
+
+}
+
+function ingresarComentario(id) {
+    let nombreUsuairo = localStorage.getItem("usuario");
+    let nodo = listPeli.buscarPeli(id);
+    let comentario = document.getElementById("comentario").value
+    nodo.comentarios.push(nombreUsuairo + ": " + comentario)
+    alert("Comentario Agregado")
+}
+
+function ingresarCa(id) {
+    let nodo = listPeli.buscarPeli(id);
+    let mouseOnlyNumberInputField = document.getElementById("mouse-only-number-input");
+    nodo.puntua = mouseOnlyNumberInputField.value;
+    alert("Puntuacion Agregada")
+}
+
+function alquilarPeli(id) {
+    let nodo = listPeli.buscarPeli(id);
+    listPeli.eliminarPelicula(id);
+    // listPeli.mostrarPeli()
+    let nodoavl = avlPeli.buscarAvlP(parseInt(id));
+    nodoavl.alquilado = true;
+    nodo.alquilado=true;
+    alert('Pelicula Alquilada')
+}

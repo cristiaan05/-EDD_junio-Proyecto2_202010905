@@ -1,63 +1,80 @@
-html{
+html {
   scroll-behavior: smooth;
 }
-.slider .indicators .indicator-item.active{
- background-color:#283593  ; 
+
+.slider .indicators .indicator-item.active {
+  background-color: #283593;
 }
-.move{
+
+.move {
   margin-top: 60px;
   margin-bottom: 20px;
   font-family: 'Bree Serif', serif;
 }
-.parallax-container{
+
+.parallax-container {
   min-height: 280px;
   height: auto;
 }
-.brand-logo{
+
+.brand-logo {
   font-family: 'Bree Serif', serif;
   font-size: 3rem !important;
 }
-#nav-mobile{
+
+#nav-mobile {
   font-family: 'Bree Serif', serif;
   font-size: 2rem !important;
-  
+
 }
-.sidenav{
+
+.sidenav {
   font-family: 'Bree Serif', serif;
   font-size: 2rem !important;
 }
-.slider h3{
+
+.slider h3 {
   font-family: 'Pacifico', cursive;
-  
+
 }
-.slider h5{
+
+.slider h5 {
   font-family: 'Bree Serif', serif;
 }
-.header{
+
+.header {
   font-family: 'Pacifico', cursive;
 }
-.card-title{
+
+.card-title {
   font-family: 'Bree Serif', serif;
 }
-.card-reveal p{
+
+.card-reveal p {
   font-family: 'Pacifico', cursive;
 }
-#aboutus p{
+
+#aboutus p {
   font-family: 'Bree Serif', serif;
 }
-.carousel-item p{
+
+.carousel-item p {
   font-family: 'Bree Serif', serif;
 }
-.carousel-item span{
+
+.carousel-item span {
   font-family: 'Pacifico', cursive;
 }
-footer h4{
+
+footer h4 {
   font-family: 'Bree Serif', serif;
 }
-footer p{
+
+footer p {
   font-family: 'Pacifico', cursive;
 }
-footer li{
+
+footer li {
   font-family: 'Pacifico', cursive;
 }
 
@@ -69,6 +86,7 @@ footer li{
   padding: 8% 0 0;
   margin: auto;
 }
+
 .form {
   position: relative;
   z-index: 1;
@@ -79,6 +97,7 @@ footer li{
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -90,6 +109,7 @@ footer li{
   box-sizing: border-box;
   font-size: 14px;
 }
+
 #checkk {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -101,11 +121,12 @@ footer li{
   box-sizing: border-box;
   font-size: 14px;
 }
+
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #283593 ;
+  background: #283593;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -115,21 +136,28 @@ footer li{
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
-  background: #283593 ;
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: #283593;
 }
+
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
 }
+
 .form .message a {
-  color: #283593 ;
+  color: #283593;
   text-decoration: none;
 }
+
 .form .register-form {
   display: none;
 }
+
 /* .container {
     position: left;
     z-index: 1;
@@ -165,12 +193,13 @@ footer li{
   } */
 
 #loginn {
-  background: #335de8; /* fallback for old browsers */
+  background: #335de8;
+  /* fallback for old browsers */
   background: #FFFFFF;
-  background: linear-gradient(90deg, rgba(255,255,255,255) 0%, rgba(255,255,255,255) 50%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 255) 0%, rgba(255, 255, 255, 255) 50%);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .padre {
@@ -181,11 +210,11 @@ footer li{
   height: 800px;
   border: 2px solid #ccc;
   /* IMPORTANTE */
-  overflow:auto;
+  overflow: auto;
   text-align: center;
 }
 
-#grafoAct{
+#grafoAct {
   background-color: #fafafa;
   margin: 1rem;
   padding: 1rem;
@@ -193,6 +222,53 @@ footer li{
   height: 1000px;
   border: 2px solid #ccc;
   /* IMPORTANTE */
-  overflow:auto;
+  overflow: auto;
   text-align: center;
+}
+
+/* ----------------------------------tabla------------------------------- */
+table th {
+  text-align: center; 
+}
+
+.table {
+  margin: auto;
+  width: 50% !important; 
+}
+#tituloHU{
+  align-content: center;
+  text-align: center;
+}
+
+#butonVA {
+  margin: auto;
+  position: relative;
+  left: 350px;
+}
+
+#butonVC {
+  margin: auto;
+  position: relative;
+  left: 350px;
+}
+
+#selectMenu{
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  align-content:flex-start;
+  position: relative;
+  left: 200px;
+  width: 30% !important; 
+}
+
+#tituloComen{
+  color: #335de8;
+  font-style: italic;
+}
+
+.checked {
+  color: orange;
 }
