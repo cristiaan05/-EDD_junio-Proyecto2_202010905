@@ -231,7 +231,8 @@
             <!-- <option selected>Escoge el Nombre del Libro</option>
             <option value="asfasfsf">asfasf</option> -->
             <button type="button" id="butonVA" class="btn btn-primary" onclick="actoresUser()">Ver Actores</button>
-            <button type="button" id="butonVC" class="btn btn-primary">Ver Categorias</button>
+            <button type="button" id="butonVC" class="btn btn-primary" onclick="categoriasUser()">Ver
+                Categorias</button>
             <br>
             <table class="table table-bordered table-striped text-center">
                 <thead>
@@ -267,11 +268,9 @@
             <table class="table table-bordered table-striped text-center">
                 <thead>
                     <tr>
-                        <th>Titulo Pelicula</th>
+                        <th>Nombre Actor</th>
                         <th>Descripcion</th>
-                        <th></th>
-                        <th></th>
-                        <th>Precio (Q)</th>
+                        <th>Correo</th>
                     </tr>
                 </thead>
                 <tbody id="tbodyAct">
@@ -285,7 +284,20 @@
                 </tbody>
             </table>
         </div>
+        <!-- ----------CATEGORIAS USER---- -->
+        <div id="catUser" style="display: none;">
+            <h3 style="position: center;" id="tituloHU">Categorias</h3>
+            <div class="row container" id="rowCat">
 
+            </div>
+            <!-- <div class="col s12 m6 l4" style="padding: 30px 5px;" id="cardCat"> -->
+                <!-- <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Categoria</h5>
+                    </div>
+                </div> -->
+            <!-- </div> -->
+        </div>
         <!-- ------------------------------------------------------ -->
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

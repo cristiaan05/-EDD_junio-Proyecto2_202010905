@@ -54,6 +54,7 @@ function cerrarSesion() {
     document.getElementById("usuario").style.display = "none"
     document.getElementById("homeUser").style.display = "none";
     document.getElementById("actoresUser").style.display = "none";
+    document.getElementById("catUser").style.display = "none";
 }
 
 function mostrarGclientes() {
@@ -117,6 +118,7 @@ function vistaUsuario() {
     document.getElementById("gactores").style.display = "none";
     document.getElementById("usuario").style.display = "block";
     document.getElementById("actoresUser").style.display = "none";
+    document.getElementById("catUser").style.display = "none";
 }
 function homeUser() {
     document.getElementById("admin").style.display = "none";
@@ -129,6 +131,7 @@ function homeUser() {
     document.getElementById("usuario").style.display = "block";
     document.getElementById("homeUser").style.display = "block";
     document.getElementById("actoresUser").style.display = "none";
+    document.getElementById("catUser").style.display = "none";
 }
 function actoresUser() {
     document.getElementById("admin").style.display = "none";
@@ -141,6 +144,20 @@ function actoresUser() {
     document.getElementById("usuario").style.display = "block";
     document.getElementById("homeUser").style.display = "none";
     document.getElementById("actoresUser").style.display = "block";
+    document.getElementById("catUser").style.display = "none";
+}
+function categoriasUser() {
+    document.getElementById("admin").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("cargas").style.display = "none";
+    document.getElementById("gclientes").style.display = "none";
+    document.getElementById("gcategorias").style.display = "none";
+    document.getElementById("gpelis").style.display = "none";
+    document.getElementById("gactores").style.display = "none";
+    document.getElementById("usuario").style.display = "block";
+    document.getElementById("homeUser").style.display = "none";
+    document.getElementById("actoresUser").style.display = "none";
+    document.getElementById("catUser").style.display = "block";
 }
 
 var svg;
@@ -796,9 +813,12 @@ class ArbolABB {
     }
 
     inABB(nodo) {
+        let tbody = document.getElementById("tbodyAct")
+        tbody.innerHTML+=''
         if (nodo != null) {
             this.inABB(nodo.izquierda);
             console.log("Valor:", nodo.nombreActor);
+            tbody.innerHTML += '<tr>\n <td>' + nodo.nombreActor + '</td>\n <td>' + nodo.descripcion + '</td>\n <td>' + nodo.correo + '</td>\n</tr>'
             this.inABB(nodo.derecha);
         }
     }
@@ -808,7 +828,10 @@ class ArbolABB {
     }
 
     preABB(nodo){
+        let tbody = document.getElementById("tbodyAct")
+        tbody.innerHTML+=''
         if(nodo!=null){
+            tbody.innerHTML += '<tr>\n <td>' + nodo.nombreActor + '</td>\n <td>' + nodo.descripcion + '</td>\n <td>' + nodo.correo + '</td>\n</tr>'
             console.log("Valor:",nodo.nombreActor);
             this.preABB(nodo.izquierda);
             this.preABB(nodo.derecha);
@@ -819,9 +842,12 @@ class ArbolABB {
     }
     
     poABB(nodo){
+        let tbody = document.getElementById("tbodyAct")
+        tbody.innerHTML+=''
         if(nodo!=null){
             this.poABB(nodo.izquierda);
             this.poABB(nodo.derecha);
+            tbody.innerHTML += '<tr>\n <td>' + nodo.nombreActor + '</td>\n <td>' + nodo.descripcion + '</td>\n <td>' + nodo.correo + '</td>\n</tr>'
             console.log("Valor:",nodo.nombreActor);           
         }
     }
@@ -1076,11 +1102,13 @@ class ListaDeListas {
 
     mostrarH(usuario, cabeza) {
         let libU = usuario.abajo;
+        let cats=document.getElementById("rowCat")
         var codigodotH = "";
         let contador = 0;
         let uniones = ""
         while (libU != null) {
             codigodotH += 'nodu' + libU.company + cabeza + '[label="' + libU.company + '",fillcolor=white,group=0] \n'
+            cats.innerHTML+='<div class="col s12 m6 l4" style="padding: 30px 5px;" id="cardCat"> <div class="card" style="width: 18rem;"> <div class="card-body"> <h5 class="card-title">'+libU.company+'</h5> </div></div> </div>'
             // console.log("---SUS LIBROS COMPRADOS: "+libU.company);
             libU = libU.siguiente;
         }
