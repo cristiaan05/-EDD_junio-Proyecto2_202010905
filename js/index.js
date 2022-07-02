@@ -642,7 +642,7 @@ class ListaSimple {
         console.log(grafoC)
         d3.select("#grafoCliente").graphviz()
             .zoom(false)
-            .renderDot(grafoC);
+            .renderDot(grafoC)
         return "ok"
     }
 
